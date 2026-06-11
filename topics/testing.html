@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software Testing — SE Learning Hub</title>
+<link rel="stylesheet" href="topic.css">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-back">← Home</a>
+  <span class="nav-sep">|</span>
+  <span class="nav-title">Software Testing</span>
+  <ul class="nav-links-right">
+    <li><a href="maintenance.html">Next: Maintenance →</a></li>
+  </ul>
+</nav>
+
+<div class="topic-hero">
+  <div class="topic-meta">
+    <span class="topic-meta-tag">Week 11</span>
+    <span class="topic-meta-week">SE@Google Ch.7</span>
+  </div>
+  <h1>Software Testing Fundamentals</h1>
+  <p>Testing is not about finding bugs — it's about confidence. A good test suite lets you change code fearlessly, knowing it will tell you when something breaks.</p>
+</div>
+
+<div class="topic-content">
+
+  <div class="info-box blue">
+    <p><strong>Key insight:</strong> Testing is a first-class engineering activity, not an afterthought. Professional teams write tests as they write code — or even before (TDD).</p>
+  </div>
+
+  <h2 class="section-h">Types of Testing</h2>
+
+  <div class="concept-card">
+    <h3>🔬 Unit Testing</h3>
+    <p>Tests the smallest piece of code in isolation — a single function or method. Fast to run, easy to pinpoint failures. Should cover the happy path, edge cases, and error cases. Frameworks: JUnit (Java), pytest (Python), flutter_test (Dart).</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🔗 Integration Testing</h3>
+    <p>Tests how multiple components work together — a database + service + API. Slower than unit tests but catches the "it works separately but not together" class of bugs.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🖥️ System Testing</h3>
+    <p>Tests the entire application as a user would. Also called end-to-end (E2E) testing. Slowest and most expensive, but validates real user flows. Tools: Selenium, Cypress, Playwright.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>👥 User Acceptance Testing (UAT)</h3>
+    <p>Done by actual users or clients. Validates that the system meets business requirements. Last gate before production release.</p>
+  </div>
+
+  <h2 class="section-h">Testing Pyramid</h2>
+
+  <div class="concept-card">
+    <h3>🔺 The Testing Pyramid</h3>
+    <p>The most famous model in software testing:</p>
+    <ul style="list-style:none; margin-top: 0.75rem;">
+      <li style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.85rem"><span style="color:var(--red);font-weight:600;width:90px;flex-shrink:0">E2E Tests</span><span style="color:var(--muted)">Few — slow, expensive, but test real user flows</span></li>
+      <li style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.85rem"><span style="color:var(--amber);font-weight:600;width:90px;flex-shrink:0">Integration</span><span style="color:var(--muted)">Some — test component interactions</span></li>
+      <li style="display:flex;gap:10px;padding:6px 0;font-size:0.85rem"><span style="color:var(--green);font-weight:600;width:90px;flex-shrink:0">Unit Tests</span><span style="color:var(--muted)">Many — fast, cheap, precise; the foundation</span></li>
+    </ul>
+    <p style="margin-top:0.75rem;font-size:0.83rem;color:var(--muted)">The more tests you have at the bottom, the faster and more reliable your test suite. Inverting the pyramid (too many E2E, few unit) = slow, brittle CI pipeline.</p>
+  </div>
+
+  <h2 class="section-h">Black-Box vs White-Box Testing</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Aspect</th><th>Black-Box</th><th>White-Box</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>What's visible</td><td>Only inputs/outputs</td><td>Full source code</td></tr>
+      <tr><td>Tester needs</td><td>Requirements knowledge</td><td>Code/architecture knowledge</td></tr>
+      <tr><td>Finds</td><td>Missing requirements, UX bugs</td><td>Logic errors, dead code, security holes</td></tr>
+      <tr><td>Used for</td><td>UAT, system testing</td><td>Unit tests, code review</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-h">Test-Driven Development (TDD)</h2>
+
+  <div class="info-box green">
+    <p><strong>TDD cycle: Red → Green → Refactor.</strong> Write a failing test first, then write the minimum code to make it pass, then clean up the code.</p>
+  </div>
+
+  <ol class="phase-list">
+    <li>
+      <div class="phase-num" style="background:var(--red)">R</div>
+      <div class="phase-body">
+        <h4>Red — Write a failing test</h4>
+        <p>Write a test for functionality that doesn't exist yet. It must fail. This clarifies exactly what you're building.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num" style="background:var(--green)">G</div>
+      <div class="phase-body">
+        <h4>Green — Make it pass</h4>
+        <p>Write the minimum possible code to make the test pass. Don't write more than needed — YAGNI (You Ain't Gonna Need It).</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num" style="background:var(--accent)">R</div>
+      <div class="phase-body">
+        <h4>Refactor — Clean up</h4>
+        <p>Improve the code without changing behavior. The tests protect you — if they still pass after refactoring, you haven't broken anything.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="code-block"><span class="cm">// TDD example in Dart / Flutter</span>
+
+<span class="cm">// Step 1: RED — write failing test</span>
+test(<span class="str">'calculateTotal adds items correctly'</span>, () {
+  expect(<span class="fn">calculateTotal</span>([<span class="num">10.0</span>, <span class="num">20.0</span>, <span class="num">5.0</span>]), equals(<span class="num">35.0</span>));
+});
+
+<span class="cm">// Step 2: GREEN — implement function</span>
+<span class="kw">double</span> <span class="fn">calculateTotal</span>(List&lt;<span class="kw">double</span>&gt; prices) {
+  <span class="kw">return</span> prices.<span class="fn">fold</span>(<span class="num">0.0</span>, (sum, p) => sum + p);
+}
+
+<span class="cm">// Step 3: REFACTOR — this is already clean ✓</span></div>
+
+  <h2 class="section-h">Key Testing Concepts</h2>
+
+  <div class="concept-card">
+    <h3>📊 Code Coverage</h3>
+    <p>The percentage of code lines/branches executed by tests. 80% is often cited as a target but it's not a magic number — 80% coverage of the wrong things is worse than 60% of the critical paths. Coverage is a proxy for quality, not quality itself.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🎭 Mocking & Stubs</h3>
+    <p>Replacing a real dependency (like a database or API) with a fake one for testing. A <strong>stub</strong> returns preset values; a <strong>mock</strong> can also verify the right calls were made. Essential for unit testing without side effects.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🔧 Regression Testing</h3>
+    <p>Running existing tests after changes to make sure nothing broke. CI/CD pipelines automate this — every commit triggers the full test suite automatically.</p>
+  </div>
+
+  <div class="info-box amber">
+    <p><strong>Exam tip:</strong> Know the difference between Verification ("are we building the product right?") and Validation ("are we building the right product?"). Verification = internal quality checks. Validation = matches user needs.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-section">
+    <h3>🧪 Quick Check</h3>
+
+    <div class="quiz-q" id="q1">
+      <p>1. In TDD, what is the correct order of the cycle?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q1',this,false)">Green → Red → Refactor</button>
+        <button class="quiz-opt" onclick="answer('q1',this,true)">Red → Green → Refactor</button>
+        <button class="quiz-opt" onclick="answer('q1',this,false)">Refactor → Red → Green</button>
+        <button class="quiz-opt" onclick="answer('q1',this,false)">Write code → Test → Refactor</button>
+      </div>
+      <div class="quiz-feedback" id="q1-fb"></div>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <p>2. Which type of testing does NOT require knowledge of the source code?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q2',this,true)">Black-box testing</button>
+        <button class="quiz-opt" onclick="answer('q2',this,false)">White-box testing</button>
+        <button class="quiz-opt" onclick="answer('q2',this,false)">Unit testing</button>
+        <button class="quiz-opt" onclick="answer('q2',this,false)">Code coverage analysis</button>
+      </div>
+      <div class="quiz-feedback" id="q2-fb"></div>
+    </div>
+
+    <div class="quiz-q" id="q3">
+      <p>3. According to the Testing Pyramid, which layer should have the most tests?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q3',this,false)">E2E / System tests</button>
+        <button class="quiz-opt" onclick="answer('q3',this,false)">Integration tests</button>
+        <button class="quiz-opt" onclick="answer('q3',this,true)">Unit tests</button>
+        <button class="quiz-opt" onclick="answer('q3',this,false)">UAT tests</button>
+      </div>
+      <div class="quiz-feedback" id="q3-fb"></div>
+    </div>
+  </div>
+
+  <div class="nav-bottom">
+    <a href="git.html">← Git & Agile</a>
+    <a href="maintenance.html">Maintenance & QA →</a>
+  </div>
+
+</div>
+
+<script>
+function answer(qId, btn, isCorrect) {
+  const q = document.getElementById(qId);
+  const opts = q.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById(qId + '-fb');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.textContent = '✓ Correct!';
+    fb.className = 'quiz-feedback show ok';
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '✗ Not quite — the right answer is highlighted.';
+    fb.className = 'quiz-feedback show no';
+    opts.forEach(o => {
+      if (o.onclick.toString().includes('true')) o.classList.add('correct');
+    });
+  }
+}
+</script>
+
+</body>
+</html>

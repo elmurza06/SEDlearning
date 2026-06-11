@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git, Code Quality & Agile — SE Learning Hub</title>
+<link rel="stylesheet" href="topic.css">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-back">← Home</a>
+  <span class="nav-sep">|</span>
+  <span class="nav-title">Git & Agile</span>
+  <ul class="nav-links-right">
+    <li><a href="testing.html">Next: Testing →</a></li>
+  </ul>
+</nav>
+
+<div class="topic-hero">
+  <div class="topic-meta">
+    <span class="topic-meta-tag">Week 9</span>
+    <span class="topic-meta-week">SE@Google Ch.5</span>
+  </div>
+  <h1>Version Control, Code Quality & Agile</h1>
+  <p>Professional engineers live by three skills: disciplined Git workflow, readable code that teams can maintain, and Agile execution that ships working software incrementally.</p>
+</div>
+
+<div class="topic-content">
+
+  <div class="info-box blue">
+    <p><strong>Key formula from the course:</strong> Professional Engineer = Git Discipline + Readable Code + Agile Execution</p>
+  </div>
+
+  <h2 class="section-h">What is Version Control?</h2>
+
+  <div class="concept-card">
+    <h3>🌿 Git as a Commit Graph</h3>
+    <p>Git tracks history as a directed acyclic graph (DAG) — each node is a snapshot of your code at a point in time. Every commit points to its parent, letting you navigate your entire project history, revert changes, and collaborate without overwriting each other's work.</p>
+  </div>
+
+  <h2 class="section-h">The Branching Model</h2>
+
+  <div class="concept-card">
+    <h3>🔒 <code>main</code> — always stable</h3>
+    <p>The main branch should always contain production-ready, tested, reviewed code. <strong>Never commit directly to main.</strong> This is a hard rule in professional teams.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>✨ <code>feature/*</code> branches</h3>
+    <p>Create a new branch for every feature. Example: <code>git checkout -b feature/user-auth</code>. When done, open a Pull Request to merge it back. Keeps work isolated and reviewable.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🐛 <code>fix/*</code> branches</h3>
+    <p>Use separate branches for bug fixes. Keeps your work organized and the history readable. Example: <code>git checkout -b fix/login-null-crash</code>.</p>
+  </div>
+
+  <h2 class="section-h">Working Tree vs Staging</h2>
+
+  <div class="code-block"><span class="cm"># Working tree: you edited the file</span>
+<span class="kw">git</span> status                 <span class="cm"># shows modified files</span>
+
+<span class="cm"># Staging: mark what you want to commit</span>
+<span class="kw">git</span> add src/auth/login.dart
+
+<span class="cm"># Committing: save a snapshot</span>
+<span class="kw">git</span> commit -m <span class="str">"feat(auth): add email validation"</span>
+
+<span class="cm"># Rule: only commit what you fully understand</span></div>
+
+  <h2 class="section-h">Good vs Bad Commits</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Bad ❌</th><th>Good ✅</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>"fix"</td><td>"fix(api): handle null response from user endpoint"</td></tr>
+      <tr><td>"update"</td><td>"feat(auth): add email validation with regex"</td></tr>
+      <tr><td>"changes"</td><td>"refactor(db): extract user query into repository"</td></tr>
+      <tr><td>"wip"</td><td>"test(login): add edge cases for empty password"</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box green">
+    <p><strong>Format:</strong> <code>type(scope): description</code> — Types: feat, fix, refactor, test, docs, chore. This is called Conventional Commits and is used at Google, Microsoft, and most professional teams.</p>
+  </div>
+
+  <h2 class="section-h">Pull Request Flow</h2>
+
+  <ol class="phase-list">
+    <li>
+      <div class="phase-num">1</div>
+      <div class="phase-body">
+        <h4>Push feature branch</h4>
+        <p><code>git push origin feature/my-feature</code> — uploads your local work to remote so others can see it.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">2</div>
+      <div class="phase-body">
+        <h4>Open Pull Request (PR)</h4>
+        <p>On GitHub/GitLab, create a PR to merge your branch into <code>main</code>. Write a clear description of what changed and why.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">3</div>
+      <div class="phase-body">
+        <h4>Code Review</h4>
+        <p>Teammates review for readability, logic, edge cases, naming. Comments should be constructive: "Can we extract this into a method?" not "This is bad."</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">4</div>
+      <div class="phase-body">
+        <h4>Fix feedback</h4>
+        <p>Address reviewer comments. Push fixes to the same branch — the PR updates automatically.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">5</div>
+      <div class="phase-body">
+        <h4>Merge</h4>
+        <p>Once approved, merge into main. Delete the feature branch to keep the repo clean.</p>
+      </div>
+    </li>
+  </ol>
+
+  <h2 class="section-h">Code Quality — The Google Mindset</h2>
+
+  <div class="info-box blue">
+    <p><strong>"Code is read much more than it's written."</strong> — The goal is to write code that your future self and teammates can understand without guessing.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>1. Clear Names</h3>
+    <div class="code-block"><span class="cm">// Bad</span>
+<span class="kw">int</span> <span class="fn">x</span>(<span class="kw">int</span> a) => a * <span class="num">2</span>;
+
+<span class="cm">// Good</span>
+<span class="kw">int</span> <span class="fn">calculateDoubleScore</span>(<span class="kw">int</span> score) => score * <span class="num">2</span>;</div>
+  </div>
+
+  <div class="concept-card">
+    <h3>2. Small Functions — One Job</h3>
+    <div class="code-block"><span class="cm">// Bad: one function does 3 things</span>
+<span class="kw">void</span> <span class="fn">processUser</span>(User u) { <span class="fn">validate</span>(u); <span class="fn">saveToDb</span>(u); <span class="fn">sendEmail</span>(u); }
+
+<span class="cm">// Good: clear names reveal intent</span>
+<span class="kw">void</span> <span class="fn">registerUser</span>(User user) {
+  <span class="fn">validateUser</span>(user);
+  <span class="fn">saveUser</span>(user);
+  <span class="fn">sendWelcomeEmail</span>(user);
+}</div>
+  </div>
+
+  <div class="concept-card">
+    <h3>3. No Magic Numbers</h3>
+    <div class="code-block"><span class="cm">// Bad: what does 18 mean?</span>
+<span class="kw">if</span> (age > <span class="num">18</span>) { ... }
+
+<span class="cm">// Good: self-documenting</span>
+<span class="kw">const</span> legalAge = <span class="num">18</span>;
+<span class="kw">if</span> (age > legalAge) { ... }</div>
+  </div>
+
+  <div class="concept-card">
+    <h3>4. Consistency</h3>
+    <div class="code-block"><span class="cm">// Bad: mixed naming styles</span>
+<span class="fn">get_user_name</span>()  getUserAge()  USER_EMAIL()
+
+<span class="cm">// Good: one consistent style</span>
+<span class="fn">getUserName</span>()  <span class="fn">getUserAge</span>()  <span class="fn">getUserEmail</span>()</div>
+  </div>
+
+  <h2 class="section-h">Agile Engineering</h2>
+
+  <div class="info-box amber">
+    <p><strong>Agile ≠ meetings.</strong> Agile is not about ceremonies or standups. It's about delivering working software in small increments, gathering feedback quickly, and adapting.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>📋 Sprint Board: ToDo → In Progress → Review → Done</h3>
+    <p>Every task moves through columns. Team visibility ensures accountability and surfaces blockers early. Tools: GitHub Projects, Jira, Linear, Notion.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>✅ Definition of Done (DoD)</h3>
+    <p>A feature is Done when: <br>
+    <strong>Code Written</strong> — follows style guidelines, no magic numbers, clear naming. <br>
+    <strong>Reviewed</strong> — peer-reviewed, all comments addressed, approved. <br>
+    <strong>Tested</strong> — unit tests passing, edge cases covered, no regressions.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧍 Daily Standup Format</h3>
+    <p><strong>What did I do?</strong> — completed tasks, merged PRs, resolved issues. <br>
+    <strong>What will I do?</strong> — planned tasks for today. <br>
+    <strong>Blockers?</strong> — dependencies, unclear requirements, technical issues.</p>
+  </div>
+
+  <h2 class="section-h">Merge vs Rebase</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>git merge</th><th>git rebase</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Preserves full history, adds a merge commit</td><td>Rewrites history as if changes were made on top of main</td></tr>
+      <tr><td>History is more honest but can look messy</td><td>Creates a cleaner, linear history</td></tr>
+      <tr><td>Safe for shared branches</td><td>Never rebase shared/public branches</td></tr>
+      <tr><td>Use for: merging feature into main</td><td>Use for: cleaning up local commits before PR</td></tr>
+    </tbody>
+  </table>
+
+  <!-- QUIZ -->
+  <div class="quiz-section">
+    <h3>🧪 Quick Check</h3>
+
+    <div class="quiz-q" id="q1">
+      <p>1. Which branch should always contain production-ready, reviewed code?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q1',this,false)">feature/login</button>
+        <button class="quiz-opt" onclick="answer('q1',this,true)">main</button>
+        <button class="quiz-opt" onclick="answer('q1',this,false)">dev</button>
+        <button class="quiz-opt" onclick="answer('q1',this,false)">hotfix</button>
+      </div>
+      <div class="quiz-feedback" id="q1-fb"></div>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <p>2. Which commit message follows best practices?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q2',this,false)">"fix stuff"</button>
+        <button class="quiz-opt" onclick="answer('q2',this,false)">"update 2"</button>
+        <button class="quiz-opt" onclick="answer('q2',this,true)">"feat(auth): add email validation on login"</button>
+        <button class="quiz-opt" onclick="answer('q2',this,false)">"changes to login screen"</button>
+      </div>
+      <div class="quiz-feedback" id="q2-fb"></div>
+    </div>
+
+    <div class="quiz-q" id="q3">
+      <p>3. A Definition of Done (DoD) requires all of the following EXCEPT:</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q3',this,false)">Code reviewed by a peer</button>
+        <button class="quiz-opt" onclick="answer('q3',this,false)">Unit tests passing</button>
+        <button class="quiz-opt" onclick="answer('q3',this,true)">Manager personally approval in writing</button>
+        <button class="quiz-opt" onclick="answer('q3',this,false)">Code follows naming conventions</button>
+      </div>
+      <div class="quiz-feedback" id="q3-fb"></div>
+    </div>
+  </div>
+
+  <div class="nav-bottom">
+    <a href="requirements.html">← Requirements</a>
+    <a href="testing.html">Software Testing →</a>
+  </div>
+
+</div>
+
+<script>
+function answer(qId, btn, isCorrect) {
+  const q = document.getElementById(qId);
+  const opts = q.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById(qId + '-fb');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.textContent = '✓ Correct!';
+    fb.className = 'quiz-feedback show ok';
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '✗ Not quite — the right answer is highlighted.';
+    fb.className = 'quiz-feedback show no';
+    opts.forEach(o => {
+      if (o.onclick.toString().includes('true')) o.classList.add('correct');
+    });
+  }
+}
+</script>
+
+</body>
+</html>

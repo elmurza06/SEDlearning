@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SE Learning Hub — Engineering College</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161b25;
+    --surface2: #1e2535;
+    --border: rgba(255,255,255,0.08);
+    --text: #e8eaf0;
+    --muted: #7b8299;
+    --accent: #4f7cff;
+    --accent2: #7c3aed;
+    --green: #22c55e;
+    --amber: #f59e0b;
+    --coral: #f97316;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,15,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-brand span {
+    display: inline-block; width: 28px; height: 28px;
+    background: var(--accent); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; color: #fff;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 1.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-badge {
+    background: var(--accent); color: #fff;
+    padding: 4px 12px; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--muted); font-size: 1rem; line-height: 1.7;
+    margin-bottom: 2rem; max-width: 460px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    padding: 10px 22px; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    border: 1px solid var(--border); color: var(--text);
+    padding: 10px 22px; border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.25); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    position: relative;
+  }
+  .sdlc-ring {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .sdlc-ring h3 {
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1rem;
+  }
+  .sdlc-steps {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .sdlc-step {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.8rem;
+  }
+  .sdlc-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .progress-bar {
+    margin-top: 1rem;
+    background: var(--surface2); border-radius: 4px; height: 4px;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 60%;
+  }
+  .progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.72rem; color: var(--muted); margin-top: 6px;
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+  }
+  .stats-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem; font-weight: 700; color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.8rem; color: var(--muted); margin-top: 4px;
+  }
+
+  /* TOPICS GRID */
+  .section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 3.5rem 2rem;
+  }
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .section-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem; font-weight: 700;
+  }
+  .section-header a {
+    font-size: 0.85rem; color: var(--accent); text-decoration: none;
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem;
+    text-decoration: none; color: var(--text);
+    transition: border-color 0.2s, transform 0.2s;
+    display: block;
+  }
+  .topic-card:hover {
+    border-color: rgba(79,124,255,0.4);
+    transform: translateY(-2px);
+  }
+  .topic-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; margin-bottom: 0.75rem;
+  }
+  .topic-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .topic-week {
+    font-size: 0.7rem; color: var(--muted);
+    background: var(--surface2); padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .topic-card h3 {
+    font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem;
+  }
+  .topic-card p {
+    font-size: 0.8rem; color: var(--muted); line-height: 1.5;
+  }
+  .topic-tags {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 0.75rem;
+  }
+  .tag {
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 20px;
+    border: 1px solid var(--border); color: var(--muted);
+  }
+
+  /* ROADMAP SECTION */
+  .roadmap-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3.5rem 2rem;
+  }
+  .roadmap-inner { max-width: 1100px; margin: 0 auto; }
+  .roadmap-inner h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .roadmap-inner > p {
+    color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem;
+  }
+  .modules-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .module-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .module-label {
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 0.75rem;
+  }
+  .module-card h3 {
+    font-size: 1rem; font-weight: 600; margin-bottom: 1rem;
+  }
+  .module-topics { list-style: none; }
+  .module-topics li {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem; color: var(--muted);
+    padding: 5px 0; border-bottom: 1px solid var(--border);
+  }
+  .module-topics li:last-child { border-bottom: none; }
+  .module-topics li::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+
+  /* QUICK QUIZ CTA */
+  .cta-section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 2rem;
+  }
+  .cta-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .cta-section p { color: var(--muted); font-size: 0.9rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    color: var(--muted); font-size: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1rem 2rem; }
+    .hero-visual { display: none; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .modules-row { grid-template-columns: 1fr; }
+    .cta-section { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span>SE</span>
+    SE Learning Hub
+  </a>
+  <ul class="nav-links">
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="topics/sdlc.html">SDLC</a></li>
+    <li><a href="topics/testing.html">Testing</a></li>
+    <li><a href="topics/git.html">Git</a></li>
+  </ul>
+  <a href="#topics" class="nav-badge">Start Learning →</a>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Engineering College · SE Course 2026</p>
+      <h1>Master <em>Software Engineering</em> the real way</h1>
+      <p>A hands-on study guide built from the actual course materials. Every topic, every concept — explained clearly with examples, quizzes and visual aids.</p>
+      <div class="hero-actions">
+        <a href="#topics" class="btn-primary">Browse Topics</a>
+        <a href="#roadmap" class="btn-secondary">View Roadmap</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="sdlc-ring">
+        <h3>SDLC Phases</h3>
+        <div class="sdlc-steps">
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#4f7cff"></span>Planning</div>
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#7c3aed"></span>Requirements</div>
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#22c55e"></span>Design</div>
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#f59e0b"></span>Development</div>
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#f97316"></span>Testing</div>
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#06b6d4"></span>Deployment</div>
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#ec4899"></span>Maintenance</div>
+          <div class="sdlc-step"><span class="sdlc-dot" style="background:#8b5cf6"></span>Feedback</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+        <div class="progress-label"><span>Course progress</span><span>Week 7 / 15</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div>
+        <div class="stat-num">15</div>
+        <div class="stat-label">Weeks of material</div>
+      </div>
+      <div>
+        <div class="stat-num">9</div>
+        <div class="stat-label">Core topics</div>
+      </div>
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">Modules</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Credits</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOPICS -->
+  <div class="section" id="topics">
+    <div class="section-header">
+      <h2>All Topics</h2>
+      <a href="#roadmap">See full roadmap →</a>
+    </div>
+    <div class="topics-grid">
+
+      <a href="topics/intro-se.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(79,124,255,0.15)">🧭</div>
+          <span class="topic-week">Week 1</span>
+        </div>
+        <h3>Intro to Software Engineering</h3>
+        <p>What is SE? Why does it matter? Core principles, professional practices and the engineering mindset.</p>
+        <div class="topic-tags">
+          <span class="tag">Foundations</span>
+          <span class="tag">Overview</span>
+        </div>
+      </a>
+
+      <a href="topics/sdlc.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(124,58,237,0.15)">🔄</div>
+          <span class="topic-week">Week 1–2</span>
+        </div>
+        <h3>SDLC — Software Development Life Cycle</h3>
+        <p>Phases of software development from planning to maintenance. Understand each stage and why order matters.</p>
+        <div class="topic-tags">
+          <span class="tag">Process</span>
+          <span class="tag">Core</span>
+        </div>
+      </a>
+
+      <a href="topics/process-models.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(34,197,94,0.15)">📋</div>
+          <span class="topic-week">Week 2–3</span>
+        </div>
+        <h3>Software Process Models</h3>
+        <p>Waterfall, Agile, Scrum, Kanban — when to use which model and the tradeoffs of each approach.</p>
+        <div class="topic-tags">
+          <span class="tag">Waterfall</span>
+          <span class="tag">Agile</span>
+          <span class="tag">Scrum</span>
+        </div>
+      </a>
+
+      <a href="topics/requirements.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(245,158,11,0.15)">📝</div>
+          <span class="topic-week">Week 3–4</span>
+        </div>
+        <h3>Requirements Engineering</h3>
+        <p>Functional vs non-functional requirements, use cases, user stories, and how to write an SRS.</p>
+        <div class="topic-tags">
+          <span class="tag">SRS</span>
+          <span class="tag">User Stories</span>
+          <span class="tag">Use Cases</span>
+        </div>
+      </a>
+
+      <a href="topics/uml.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(249,115,22,0.15)">📐</div>
+          <span class="topic-week">Week 5–6</span>
+        </div>
+        <h3>UML Diagrams</h3>
+        <p>Class, Sequence, Activity, Use Case diagrams — how to model systems visually with UML notation.</p>
+        <div class="topic-tags">
+          <span class="tag">Class Diagram</span>
+          <span class="tag">Sequence</span>
+          <span class="tag">Activity</span>
+        </div>
+      </a>
+
+      <a href="topics/solid.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(6,182,212,0.15)">🏗️</div>
+          <span class="topic-week">Week 5–7</span>
+        </div>
+        <h3>SOLID Principles & Design</h3>
+        <p>Single responsibility, Open/closed, Liskov, Interface segregation, Dependency inversion — with real code examples.</p>
+        <div class="topic-tags">
+          <span class="tag">SOLID</span>
+          <span class="tag">OOP</span>
+          <span class="tag">Patterns</span>
+        </div>
+      </a>
+
+      <a href="topics/git.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(236,72,153,0.15)">🌿</div>
+          <span class="topic-week">Week 9</span>
+        </div>
+        <h3>Version Control, Git & Agile</h3>
+        <p>Branching, commits, pull requests, code review culture and Agile engineering practices.</p>
+        <div class="topic-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Agile</span>
+          <span class="tag">Code Quality</span>
+        </div>
+      </a>
+
+      <a href="topics/testing.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(139,92,246,0.15)">🧪</div>
+          <span class="topic-week">Week 11</span>
+        </div>
+        <h3>Software Testing Fundamentals</h3>
+        <p>Unit, integration, system testing. TDD, black-box vs white-box, test coverage and debugging strategies.</p>
+        <div class="topic-tags">
+          <span class="tag">TDD</span>
+          <span class="tag">Unit Tests</span>
+          <span class="tag">QA</span>
+        </div>
+      </a>
+
+      <a href="topics/maintenance.html" class="topic-card">
+        <div class="topic-header">
+          <div class="topic-icon" style="background:rgba(34,197,94,0.15)">🔧</div>
+          <span class="topic-week">Week 13</span>
+        </div>
+        <h3>Software Maintenance & QA</h3>
+        <p>Types of maintenance, quality assurance processes, CI/CD pipelines and keeping software healthy long-term.</p>
+        <div class="topic-tags">
+          <span class="tag">Maintenance</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">QA</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="roadmap-section" id="roadmap">
+    <div class="roadmap-inner">
+      <h2>Course Roadmap</h2>
+      <p>15 weeks across 2 modules — from foundations to delivery.</p>
+      <div class="modules-row">
+        <div class="module-card">
+          <div class="module-label" style="color: var(--accent)">Module 1 · Weeks 1–7</div>
+          <h3>Foundations of Software Engineering</h3>
+          <ul class="module-topics">
+            <li>Course Overview & Intro to SE</li>
+            <li>Software Process Models (Waterfall, Agile)</li>
+            <li>Requirements Engineering (Functional & NFR)</li>
+            <li>Use Cases, User Stories, Modeling</li>
+            <li>Software Design Principles (SOLID)</li>
+            <li>UML Diagrams: Class, Sequence, Activity</li>
+            <li>Architecture Patterns (MVC, Microservices)</li>
+            <li>Midterm Exam — Week 8</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="module-label" style="color: var(--accent2)">Module 2 · Weeks 9–15</div>
+          <h3>Construction & Delivery</h3>
+          <ul class="module-topics">
+            <li>Version Control (Git), Agile Practices</li>
+            <li>Software Implementation: Clean Code</li>
+            <li>Software Testing: Unit, Integration, TDD</li>
+            <li>Project Management: Planning, CI/CD</li>
+            <li>Software Maintenance & QA</li>
+            <li>Secure Development & DevOps Trends</li>
+            <li>Final Presentations & Capstone Project</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div>
+      <h2>Ready to start? Pick a topic.</h2>
+      <p>Each page has key concepts, visual explanations, and a mini-quiz at the end.</p>
+    </div>
+    <a href="topics/sdlc.html" class="btn-primary">Start with SDLC →</a>
+  </div>
+
+</main>
+
+<footer>
+  SE Learning Hub · Engineering College 2026 · Built from course materials by Ramil Salikhar
+</footer>
+
+</body>
+</html>

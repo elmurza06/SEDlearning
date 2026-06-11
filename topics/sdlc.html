@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDLC — SE Learning Hub</title>
+<link rel="stylesheet" href="topic.css">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-back">← Home</a>
+  <span class="nav-sep">|</span>
+  <span class="nav-title">SDLC</span>
+  <ul class="nav-links-right">
+    <li><a href="process-models.html">Next: Process Models →</a></li>
+  </ul>
+</nav>
+
+<div class="topic-hero">
+  <div class="topic-meta">
+    <span class="topic-meta-tag">Core Concept</span>
+    <span class="topic-meta-week">Weeks 1–2</span>
+  </div>
+  <h1>Software Development Life Cycle</h1>
+  <p>The SDLC is the structured process that guides how software is planned, created, tested and maintained. Understanding it is the foundation of professional software engineering.</p>
+</div>
+
+<div class="topic-content">
+
+  <h2 class="section-h">What is SDLC?</h2>
+
+  <div class="concept-card">
+    <h3>📌 Definition</h3>
+    <p>The Software Development Life Cycle (SDLC) is a systematic process for planning, creating, testing, and deploying software. It provides a structured framework that breaks development into distinct phases, each with clear goals, deliverables, and responsibilities.</p>
+  </div>
+
+  <div class="info-box blue">
+    <p><strong>Why it matters:</strong> Without a structured lifecycle, projects tend to go over budget, miss deadlines, and ship buggy software. The SDLC exists to bring predictability and quality to a complex creative process.</p>
+  </div>
+
+  <h2 class="section-h">The 7 Phases</h2>
+
+  <ol class="phase-list">
+    <li>
+      <div class="phase-num">1</div>
+      <div class="phase-body">
+        <h4>Planning</h4>
+        <p>Define project scope, timeline, budget, and team. Identify feasibility and risks. Output: Project Plan, Feasibility Study.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">2</div>
+      <div class="phase-body">
+        <h4>Requirements Analysis</h4>
+        <p>Gather and document what the system must do (functional) and how it should perform (non-functional). Output: Software Requirements Specification (SRS).</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">3</div>
+      <div class="phase-body">
+        <h4>System Design</h4>
+        <p>Translate requirements into architecture. Define database schema, UI wireframes, system components. Output: Design Document, UML diagrams.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">4</div>
+      <div class="phase-body">
+        <h4>Implementation (Coding)</h4>
+        <p>Developers write code based on the design. This is where Git, code reviews and Agile sprints happen. Output: Working code + tests.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">5</div>
+      <div class="phase-body">
+        <h4>Testing</h4>
+        <p>Verify the software does what the requirements say. Unit tests, integration tests, UAT (user acceptance testing). Output: Test reports, bug fixes.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">6</div>
+      <div class="phase-body">
+        <h4>Deployment</h4>
+        <p>Release software to production. Could be a phased rollout, blue-green deployment or full release. Output: Live running system.</p>
+      </div>
+    </li>
+    <li>
+      <div class="phase-num">7</div>
+      <div class="phase-body">
+        <h4>Maintenance</h4>
+        <p>Fix bugs, add features, adapt to new requirements over the software's lifetime. This phase is often the longest and most expensive.</p>
+      </div>
+    </li>
+  </ol>
+
+  <h2 class="section-h">Types of SDLC Models</h2>
+
+  <div class="concept-card">
+    <h3>🌊 Waterfall Model</h3>
+    <p>Phases flow sequentially. Each phase must complete before the next begins. Good for projects with fixed, well-understood requirements. Bad when requirements change mid-project.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🔁 Iterative / Agile</h3>
+    <p>Development happens in short cycles (sprints). Requirements evolve. Feedback is gathered after each iteration. Most modern software teams use this. Covered in depth in Process Models.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🌀 Spiral Model</h3>
+    <p>Combines iterative development with risk analysis. Each spiral covers planning → risk analysis → development → evaluation. Best for large, high-risk projects.</p>
+  </div>
+
+  <h2 class="section-h">Waterfall vs Agile — Quick Comparison</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>Waterfall</th>
+        <th>Agile</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Requirements</td>
+        <td>Fixed upfront</td>
+        <td>Evolve throughout</td>
+      </tr>
+      <tr>
+        <td>Delivery</td>
+        <td>One big release at end</td>
+        <td>Small releases every sprint</td>
+      </tr>
+      <tr>
+        <td>Customer involvement</td>
+        <td>Low (beginning + end)</td>
+        <td>High (every sprint)</td>
+      </tr>
+      <tr>
+        <td>Change handling</td>
+        <td>Expensive and difficult</td>
+        <td>Expected and embraced</td>
+      </tr>
+      <tr>
+        <td>Best for</td>
+        <td>Construction, compliance software</td>
+        <td>Web apps, startups, products</td>
+      </tr>
+      <tr>
+        <td>Documentation</td>
+        <td>Heavy upfront docs</td>
+        <td>Just enough documentation</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box amber">
+    <p><strong>Exam tip:</strong> When asked to choose a model in an exam scenario — look for keywords. "Fixed requirements + government project" → Waterfall. "Unclear requirements + startup + user feedback" → Agile.</p>
+  </div>
+
+  <h2 class="section-h">Key Terms to Know</h2>
+
+  <div class="concept-card">
+    <h3>📄 SRS — Software Requirements Specification <span class="badge">Document</span></h3>
+    <p>The formal document that captures all functional and non-functional requirements. It's the contract between developers and stakeholders about what the software will do.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>✅ Definition of Done (DoD)</h3>
+    <p>A shared checklist that defines when a feature is truly complete. Example: code written + reviewed + unit tested + deployed to staging = Done. Agile teams live by this.</p>
+  </div>
+
+  <div class="concept-card">
+    <h3>🔄 CI/CD — Continuous Integration / Continuous Deployment</h3>
+    <p>A practice where code changes are automatically tested and deployed. Every commit triggers tests; if they pass, the code ships. Reduces "it works on my machine" problems.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-section">
+    <h3>🧪 Quick Check</h3>
+
+    <div class="quiz-q" id="q1">
+      <p>1. Which SDLC phase produces the Software Requirements Specification (SRS)?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q1',this,false)">Planning</button>
+        <button class="quiz-opt" onclick="answer('q1',this,true)">Requirements Analysis</button>
+        <button class="quiz-opt" onclick="answer('q1',this,false)">System Design</button>
+        <button class="quiz-opt" onclick="answer('q1',this,false)">Testing</button>
+      </div>
+      <div class="quiz-feedback" id="q1-fb"></div>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <p>2. A government agency needs software with completely fixed legal requirements. Which model fits best?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q2',this,false)">Agile / Scrum</button>
+        <button class="quiz-opt" onclick="answer('q2',this,true)">Waterfall</button>
+        <button class="quiz-opt" onclick="answer('q2',this,false)">Kanban</button>
+        <button class="quiz-opt" onclick="answer('q2',this,false)">Extreme Programming</button>
+      </div>
+      <div class="quiz-feedback" id="q2-fb"></div>
+    </div>
+
+    <div class="quiz-q" id="q3">
+      <p>3. Which phase is typically the longest and most expensive in practice?</p>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer('q3',this,false)">Implementation</button>
+        <button class="quiz-opt" onclick="answer('q3',this,false)">Testing</button>
+        <button class="quiz-opt" onclick="answer('q3',this,true)">Maintenance</button>
+        <button class="quiz-opt" onclick="answer('q3',this,false)">Planning</button>
+      </div>
+      <div class="quiz-feedback" id="q3-fb"></div>
+    </div>
+  </div>
+
+  <div class="nav-bottom">
+    <a href="../index.html">← All Topics</a>
+    <a href="process-models.html">Process Models →</a>
+  </div>
+
+</div>
+
+<script>
+function answer(qId, btn, isCorrect) {
+  const q = document.getElementById(qId);
+  const opts = q.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById(qId + '-fb');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.textContent = '✓ Correct!';
+    fb.className = 'quiz-feedback show ok';
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '✗ Not quite — try to find the right answer above.';
+    fb.className = 'quiz-feedback show no';
+    opts.forEach(o => {
+      if (o.onclick.toString().includes('true')) o.classList.add('correct');
+    });
+  }
+}
+</script>
+
+</body>
+</html>
